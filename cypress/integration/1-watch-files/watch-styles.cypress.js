@@ -9,7 +9,7 @@ const backupAppStylesheet = 'cypress/temp/temp-application.scss'
 describe('watch sass files', () => {
   describe(`sass file ${cypressTestStylePattern} should be created and included within the ${appStylesheet} and accessible from the browser as /${publicStylesheet}`, () => {
     const cssStatement = `
-    .govuk-header { background: red; }
+    .hods-header { background: red; }
     `
 
     before(() => {
@@ -24,13 +24,13 @@ describe('watch sass files', () => {
 
       cy.task('deleteFile', { filename: cypressTestStylePattern })
 
-      cy.get('.govuk-header', { timeout: 20000 }).should('have.css', 'background-color', 'rgb(11, 12, 12)')
+      cy.get('.hods-header', { timeout: 20000 }).should('have.css', 'background-color', 'rgb(255, 255, 255)')
       cy.task('deleteFile', { filename: backupAppStylesheet })
     })
 
     it('The colour of the header should be change to red then back to black', () => {
       cy.task('log', 'The colour of the header should be black')
-      cy.get('.govuk-header', { timeout: 20000 }).should('have.css', 'background-color', 'rgb(11, 12, 12)')
+      cy.get('.hods-header', { timeout: 20000 }).should('have.css', 'background-color', 'rgb(255, 255, 255)')
 
       cy.task('log', `Create ${cypressTestStylePattern}`)
       cy.task('createFile', {
@@ -47,7 +47,7 @@ describe('watch sass files', () => {
       })
 
       cy.task('log', 'The colour of the header should be changed to red')
-      cy.get('.govuk-header', { timeout: 20000 }).should('have.css', 'background-color', 'rgb(255, 0, 0)')
+      cy.get('.hods-header', { timeout: 20000 }).should('have.css', 'background-color', 'rgb(255, 0, 0)')
     })
   })
 })
