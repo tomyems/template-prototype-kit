@@ -7,7 +7,7 @@ const waitForApplication = async () => {
   cy.task('waitUntilAppRestarts')
   cy.visit(hostName)
   cy.get('h1.govuk-heading-xl', { timeout: 20000 })
-    .should('contains.text', 'Prototype your service using GOV.UK Prototype Kit')
+    .should('contains.text', 'Prototype your service')
 }
 
 module.exports = {
