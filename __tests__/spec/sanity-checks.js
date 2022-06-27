@@ -9,8 +9,9 @@ const request = require('supertest')
 const sass = require('sass')
 
 const app = require('../../server.js')
-const gulpConfig = require('../../gulp/config.json')
+const buildConfig = require('../../lib/build/config.json')
 const utils = require('../../lib/utils')
+const { generateAssets } = require('../../lib/build/tasks')
 
 function readFile (pathFromRoot) {
   return fs.readFileSync(path.join(__dirname, '../../' + pathFromRoot), 'utf8')
@@ -20,11 +21,15 @@ function readFile (pathFromRoot) {
  * Basic sanity checks on the dev server
  */
 describe('The Prototype Kit', () => {
+  beforeAll(() => {
+    generateAssets()
+  })
+
   it('should generate assets into the /public folder', () => {
-    assert.doesNotThrow(function () {
-      fs.accessSync(path.resolve(__dirname, '../../public/javascripts/application.js'))
-      fs.accessSync(path.resolve(__dirname, '../../public/images/unbranded.ico'))
-      fs.accessSync(path.resolve(__dirname, '../../public/stylesheets/application.css'))
+    assert.doesNotThrow(async function () {
+      await utils.waitUntilFileExists(path.resolve(__dirname, '../../public/javascripts/application.js'), 5000)
+      await utils.waitUntilFileExists(path.resolve(__dirname, '../../public/images/unbranded.ico'), 5000)
+      await utils.waitUntilFileExists(path.resolve(__dirname, '../../public/stylesheets/application.css'), 5000)
     })
   })
 
@@ -135,9 +140,9 @@ describe('The Prototype Kit', () => {
     })
   })
 
-  const sassFiles = glob.sync(gulpConfig.paths.assets + '/sass/*.scss')
+  const sassFiles = glob.sync(buildConfig.paths.assets + '/sass/*.scss')
 
-  describe(`${gulpConfig.paths.assets}sass/`, () => {
+  describe(`${buildConfig.paths.assets}sass/`, () => {
     it.each(sassFiles)('%s renders to CSS without errors', async (file) => {
       return new Promise((resolve, reject) => {
         sass.render({

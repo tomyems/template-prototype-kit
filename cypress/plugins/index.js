@@ -12,13 +12,12 @@
 // This function is called when a project is opened or re-opened (e.g. due to
 // the project's config changing)
 // const spawn = require('child_process').spawn
-const waitOn = require('wait-on')
 const fs = require('fs')
+const path = require('path')
+
+const waitOn = require('wait-on')
 
 const { sleep } = require('../integration/utils')
-const { hostName } = require('../config')
-
-const waitUntilAppRestarts = async (timeout) => await waitOn({ delay: 2000, resources: [hostName], timeout })
 
 const createFolderForFile = (filepath) => {
   const dir = filepath.substring(0, filepath.lastIndexOf('/'))
@@ -37,8 +36,22 @@ module.exports = (on, config) => {
   // `on` is used to hook into various events Cypress emits
   // `config` is the resolved Cypress config
 
+  config.env.projectFolder = process.env.KIT_TEST_DIR || process.cwd()
+  config.env.tempFolder = path.join(__dirname, '..', 'temp')
+
+  const packagePath = path.join(config.env.projectFolder, 'package.json')
+  const packageContent = fs.readFileSync(packagePath, 'utf8')
+  const packageObject = JSON.parse(packageContent)
+  const dependencies = packageObject.dependencies || {}
+
+  if ('govuk-prototype-kit' in dependencies) {
+    config.env.packageFolder = path.join(config.env.projectFolder, 'node_modules', 'govuk-prototype-kit')
+  }
+
+  const waitUntilAppRestarts = async (timeout) => await waitOn({ delay: 2000, resources: [config.baseUrl], timeout })
+
   on('task', {
-    copyFile: async ({ source, target, timeout = 2000 }) => {
+    copyFile: async ({ source, target }) => {
       try {
         createFolderForFile(target)
         fs.copyFileSync(source, target)
@@ -110,4 +123,6 @@ module.exports = (on, config) => {
       return null
     }
   })
+
+  return config
 }
