@@ -1,6 +1,10 @@
 name: Run tests
 
-on: [push, pull_request]
+on:
+  push:
+    branches:
+      - main
+  pull_request:
 
 jobs:
   run-tests:
@@ -15,19 +19,33 @@ jobs:
     runs-on: ${{ matrix.os }}
     timeout-minutes: 15
 
+    defaults:
+      run:
+        shell: bash
+
     env:
-      npm_config_include: 'optional'
+      CYPRESS_CACHE_FOLDER: ~/.cache/Cypress
 
     steps:
     - uses: actions/checkout@v2
+
     - name: Use Node v${{ matrix.node-version }}
-      uses: actions/setup-node@v1
+      uses: actions/setup-node@v3
       with:
+        cache: 'npm'
         node-version: ${{ matrix.node-version }}
+
+    - name: Cache Cypress binary
+      uses: actions/cache@v3
+      with:
+        path: ~/.cache/Cypress
+        key: cypress-${{ runner.os }}-cypress-${{ hashFiles('**/package.json') }}
+
     - run: npm ci
-    - run: npm test
+
+    - run: npx jest
       env:
         CI: true
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
     - run: npm run test:integration
-      continue-on-error: ${{ matrix.os == 'macos-latest' }}  # TODO: fix kit so this isn't needed

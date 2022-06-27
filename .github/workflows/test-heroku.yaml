@@ -1,0 +1,23 @@
+name: Test kit on Heroku
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+jobs:
+  test-heroku:
+
+    name: Test
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Use Node v16
+      uses: actions/setup-node@v3
+      with:
+        cache: 'npm'
+        node-version: '16'
+    - run: npm ci
+    - run: npm run test:heroku

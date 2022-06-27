@@ -1,7 +1,10 @@
+const path = require('path')
+
 const { waitForApplication } = require('../utils')
-const cypressRoutes = 'cypress/fixtures/routes.js'
-const appRoutes = 'app/routes.js'
-const backupRoutes = 'cypress/temp/temp-routes.js'
+
+const routesFixture = path.join(Cypress.config('fixturesFolder'), 'routes.js')
+const appRoutes = path.join(Cypress.env('projectFolder'), 'app', 'routes.js')
+const backupRoutes = path.join(Cypress.env('tempFolder'), 'temp-routes.js')
 const appUrl = 'http://localhost:3000'
 const pagePath = '/cypress-test'
 const pageUrl = `${appUrl}${pagePath}`
@@ -25,12 +28,12 @@ describe('watch route file', () => {
       .should('contains.text', `Page not found: ${pagePath}`)
 
     cy.task('log', `Replace ${appRoutes} with Cypress routes`)
-    cy.task('copyFile', { source: cypressRoutes, target: appRoutes })
+    cy.task('copyFile', { source: routesFixture, target: appRoutes })
 
     waitForApplication()
 
     cy.task('log', 'The cypress test page should be displayed')
-    cy.visit(pageUrl, { failOnStatusCode: false })
+    cy.visit(pageUrl)
     cy.get('h1', { timeout: 20000 })
       .should('contains.text', 'CYPRESS TEST PAGE')
 
