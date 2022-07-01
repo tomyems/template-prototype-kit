@@ -3,10 +3,10 @@ const path = require('path')
 const { waitForApplication } = require('../utils')
 
 const appStyles = path.join(Cypress.env('projectFolder'), 'app', 'assets', 'sass')
-const appStylesheet = path.join(appStyles, 'application.scss')
+const appStylesheet = path.join(appStyles, 'ho-application.scss')
 const cypressTestStyles = 'cypress-test'
 const cypressTestStylePattern = `${appStyles}/patterns/_${cypressTestStyles}.scss`
-const publicStylesheet = 'public/stylesheets/application.css'
+const publicStylesheet = 'public/stylesheets/ho-application.css'
 const backupAppStylesheet = path.join(Cypress.env('tempFolder'), 'temp-application.scss')
 
 describe('watch sass files', () => {
@@ -31,8 +31,8 @@ describe('watch sass files', () => {
       cy.task('deleteFile', { filename: backupAppStylesheet })
     })
 
-    it('The colour of the header should be change to red then back to black', () => {
-      cy.task('log', 'The colour of the header should be black')
+    it('The colour of the header should be change to red then back to white', () => {
+      cy.task('log', 'The colour of the header should be white')
       cy.get('.hods-header', { timeout: 20000 }).should('have.css', 'background-color', 'rgb(255, 255, 255)')
 
       cy.task('log', `Create ${cypressTestStylePattern}`)

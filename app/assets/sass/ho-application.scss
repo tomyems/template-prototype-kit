@@ -1,0 +1,13 @@
+// global styles for how the font works
+$govuk-font-family: inherit;
+
+// If you want to use legacy patterns, uncomment the section in application.scss
+@import "application";
+
+// Roboto is the Home Office font
+@import "roboto";
+
+// Imports all of the Home Office components (https://design.homeoffice.gov.uk/components)
+@import "home-office/all";
+
+// Add extra styles here, or re-organise the Sass files in whichever way makes most sense to you
