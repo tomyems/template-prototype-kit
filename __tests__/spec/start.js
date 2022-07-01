@@ -37,7 +37,7 @@ describe('npm start', () => {
 
       const app = child_process.spawnSync(
         'node lib/build/dev-server',
-        { cwd: testDir, encoding: 'utf8', shell: true, timeout: 2500 }
+        { cwd: testDir, encoding: 'utf8', shell: true, timeout: 5000 }
       )
 
       expect(app).toEqual(expect.objectContaining({
