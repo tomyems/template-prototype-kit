@@ -1,0 +1,28 @@
+{#
+  Sets the link in the header to where the platform title goes.
+  {% set homeLink = "index" %}
+#}
+
+{% extends "layout.html" %}
+
+{% block pageTitle %}
+  {{ pageTitle }} - {{ platformName }}
+{% endblock %}
+
+{% block beforeContent %}
+  <style type="text/css">
+    {% block pageStyle %}{% endblock %}
+  </style>
+
+  {% block backLink %}{% endblock %}
+{% endblock %}
+
+{% block content %}{% endblock %}
+
+<!-- Links in the footer are generaly accessible across the prototype. To add a
+link just add a list item. -->
+{% block footerLinks %}
+  <li class="hods-footer__navigation-item">
+    <a class="hods-footer__link" href="index">Page index</a>
+  </li>
+{% endblock %}

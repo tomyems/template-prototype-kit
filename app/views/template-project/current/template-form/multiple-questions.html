@@ -1,0 +1,92 @@
+{% extends "template-project/current/template-form/base-form.html" %}
+
+<!-- This makes a H1 with the pageHeading text. It also sets the title of the
+page. -->
+{% set pageHeading = "Event details" %}
+
+<!-- The content between the heading 1 and the buttons -->
+{% block pageContent %}
+<div class="govuk-form-group {% if errorEventDate %}govuk-form-group--error{% endif%}">
+  <fieldset class="govuk-fieldset" role="group" aria-describedby="event-date-hint {% if errorEventDate %}event-date-error{% endif %}">
+    <legend class="govuk-fieldset__legend">
+      Event date
+    </legend>
+    <div id="event-date-hint" class="govuk-hint">
+      For example, 27 3 2022
+    </div>
+    {% if errorEventDate %}
+    <p id="event-date-error" class="govuk-error-message">
+      <span class="govuk-visually-hidden">Error:</span>{{ errorEventDate.text }}
+    </p>
+    {% endif %}
+    <div class="govuk-date-input" id="event-date">
+      <div class="govuk-date-input__item">
+        <div class="govuk-form-group">
+          <label class="govuk-label govuk-date-input__label" for="event-date-day">
+            Day
+          </label>
+          <input class="govuk-input govuk-date-input__input govuk-input--width-2 {{ errorEventDate.dayError }}" id="event-date-day" name="event-date-day" type="text" inputmode="numeric" value="{{data['event-date-day'] or today().day }}">
+        </div>
+      </div>
+      <div class="govuk-date-input__item">
+        <div class="govuk-form-group">
+          <label class="govuk-label govuk-date-input__label" for="event-date-month">
+            Month
+          </label>
+          <input class="govuk-input govuk-date-input__input govuk-input--width-2 {{ errorEventDate.monthError }}" id="event-date-month" name="event-date-month" type="text" inputmode="numeric" value="{{data['event-date-month'] or today().month }}">
+        </div>
+      </div>
+      <div class="govuk-date-input__item">
+        <div class="govuk-form-group">
+          <label class="govuk-label govuk-date-input__label" for="event-date-year">
+            Year
+          </label>
+          <input class="govuk-input govuk-date-input__input govuk-input--width-4 {{ errorEventDate.yearError }}" id="event-date-year" name="event-date-year" type="text" inputmode="numeric" value="{{data['event-date-year'] or today().year }}">
+        </div>
+      </div>
+    </div>
+  </fieldset>
+</div>
+
+{{ govukDateInput({
+  id: "next-event",
+  namePrefix: "next-event",
+  fieldset: {
+    legend: {
+      text: "When is the next event?"
+    }
+  },
+  hint: {
+    text: "For example, 27 3 2007"
+  },
+  items: [
+    {
+      classes: "govuk-input--width-2 " + (errorNextEvent.dayError | default("")),
+      name: "day",
+      value: data['next-event-day'] | default(today.day, true)
+    },
+    {
+      classes: "govuk-input--width-2 " + (errorNextEvent.monthError | default("")),
+      name: "month",
+      value: data['next-event-month'] | default(today.month, true)
+    },
+    {
+      classes: "govuk-input--width-4 " + (errorNextEvent.yearError | default("")),
+      name: "year",
+      value: data['next-event-year'] | default(today.year, true)
+    }
+  ],
+  errorMessage: errorNextEvent
+}) }}
+
+{{ govukTextarea({
+  name: "event-description",
+  id: "event-description",
+  label: {
+    text: "What happened at the event?"
+  },
+  value: data['event-description'],
+  errorMessage: errorEventDescription
+}) }}
+
+{% endblock %}

@@ -1,0 +1,74 @@
+{% extends "template-project/2/base-form.html" %}
+
+{% set pageHeading = "Event details" %}
+{% set nextPage = "index" %}
+{% set useSubmitButton = true %}
+
+{% block style %}
+  .govuk-summary-list__key {
+    width: 20%
+  }
+  .govuk-summary-list__value {
+    width: 60%
+  }
+  .govuk-summary-list__action {
+    width: 20%
+  }
+{% endblock %}
+
+{% block pageContent %}
+  <dl class="govuk-summary-list govuk-!-margin-bottom-9">
+    <div class="govuk-summary-list__row">
+      <dt class="govuk-summary-list__key">
+        Radios
+      </dt>
+      <dd class="govuk-summary-list__value">
+        {{ data['intercept'] or "Example value" }}
+      </dd>
+      <dd class="govuk-summary-list__actions">
+        <a class="govuk-link" href="radios">
+          Change<span class="govuk-visually-hidden"> radios</span>
+        </a>
+      </dd>
+    </div>
+    <div class="govuk-summary-list__row">
+      <dt class="govuk-summary-list__key">
+        Checkboxes
+      </dt>
+      <dd class="govuk-summary-list__value">
+        {{ data['waste'] or "Example checkbox value" }}
+      </dd>
+      <dd class="govuk-summary-list__actions">
+        <a class="govuk-link" href="checkboxes">
+          Change<span class="govuk-visually-hidden"> checkbox</span>
+        </a>
+      </dd>
+    </div>
+    <div class="govuk-summary-list__row">
+      <dt class="govuk-summary-list__key">
+        Event date
+      </dt>
+      <dd class="govuk-summary-list__value">
+        {{ data['event-date-day'] + " " + data['event-date-month'] | toMonth + " " + data['event-date-year'] }}
+      </dd>
+      <dd class="govuk-summary-list__actions">
+        <a class="govuk-link" href="multiple-questions">
+          Change<span class="govuk-visually-hidden"> event date</span>
+        </a>
+      </dd>
+    </div>
+    <div class="govuk-summary-list__row">
+      <dt class="govuk-summary-list__key">
+        Event description
+      </dt>
+      <dd class="govuk-summary-list__value">
+        {{ data['event-description'] or "Example description "}}
+      </dd>
+      <dd class="govuk-summary-list__actions">
+        <a class="govuk-link" href="multiple-questions">
+          Change<span class="govuk-visually-hidden"> event description</span>
+        </a>
+      </dd>
+    </div>
+  </dl>
+{% endblock %}

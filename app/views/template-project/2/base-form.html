@@ -1,0 +1,62 @@
+{% extends "template-project/2/base.html" %}
+
+{% set formName = formName | default("Check carrier compliance", true) %}
+
+{% block pageTitle %}
+  {% set pageTitle = pageTitle | default(pageHeading, true) %}
+  {% if error %}
+      {% set pageTitle = "Error: " + pageTitle %}
+  {% endif %}
+  {{ pageTitle }} - {{ formName }} - {{ platformName }}
+{% endblock %}
+
+{% block backLink %}
+  {{ govukBackLink({
+    text: "Back",
+    href: "javascript:window.history.back()"
+  }) }}
+{% endblock %}
+
+{% block content %}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-full">
+      {% if errorList %}
+        {{ govukErrorSummary({
+          "titleText": "There is a problem",
+          "errorList": errorList
+        }) }}
+      {% endif %}
+
+      {% if pageHeading %}
+        <h1 class="govuk-heading-l">
+          {{ pageHeading | default(pageTitle, true) }}
+        </h1>
+      {% endif %}
+
+      <form id="form-next" class="form" action="{{ nextPage }}" method="post" novalidate>
+
+          {% block pageContent %}
+            <p>Override this content</p>
+          {% endblock %}
+
+          {% block buttons %}
+              <div class="govuk-button-group">
+                <!-- The first button is invisible on the screen. This is the button activated when the enter key is pressed -->
+                {% if useSubmitButton %}
+                  <button class="govuk-button" data-module="govuk-button">
+                    Submit
+                  </button>
+                {% else %}
+                  <button class="govuk-button" data-module="govuk-button">
+                    Save and continue
+                  </button>
+                {% endif %}
+                <button class="govuk-button govuk-button--secondary" data-module="govuk-button" formaction="#">
+                  Save and return later
+                </button>
+            {% endblock %}
+        </div>
+      </form>
+    </div>
+  </div>
+{% endblock %}

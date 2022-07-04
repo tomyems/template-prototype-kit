@@ -129,6 +129,25 @@ value of $govuk-black #}
 
 {% set mainClasses = mainClasses | default("govuk-main-wrapper--auto-spacing") %}
 
+{% block main %}
+
+
+<div class="hods-page__container hods-width-container {{ containerClasses }}">
+  <div class="govuk-phase-banner">
+    <div class="govuk-width-container">
+      <p class="govuk-phase-banner__content">
+          <strong class="govuk-tag govuk-phase-banner__content__tag">PROTOTYPE</strong>This is a new service – your <a class="govuk-link" href="#">feedback</a> will help us to improve it.
+      </p>
+    </div>
+  </div>
+  {% block beforeContent %} {% endblock %}
+
+  <main class="govuk-main-wrapper" id="main-content" role="main" {% if mainLang %} lang="{{ mainLang }}" {% endif %}>
+    {% block content %}{% endblock %}
+  </main>
+</div>
+{% endblock %}
+
 {% block footer %}
   <footer class="hods-footer" role="contentinfo">
     <div class="hods-footer__inner">
@@ -141,6 +160,8 @@ value of $govuk-black #}
             id="navigation"
             class="hods-footer__navigation-list"
           >
+            {% block footerLinks %}
+            {% endblock %}
             {% if useAutoStoreData %}
               <li class="hods-footer__navigation-item">
                 <a

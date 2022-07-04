@@ -1,0 +1,38 @@
+{% extends "template-project/current/base.html" %}
+
+{% set pageTitle = "Page index for template" %}
+
+{% block backLink %}
+  {{ govukBackLink({
+    text: "Back",
+    href: "../../index"
+  }) }}
+{% endblock %}
+
+{% block content %}
+  <span class="govuk-caption-l">Current</span>
+  <h1 class="govuk-heading-l">Form pages</h1>
+  <p>Copy these form pages to easily create new questions pages.</p>
+  <ul class="govuk-list govuk-list--bullet">
+    <li><a href="template-form/radios">Radio question</a> with routing</li>
+    <li><a href="template-form/checkboxes">Checkboxes question</a></li>
+    <li><a href="template-form/multiple-questions">Multiple questions</a> with today's date</li>
+    <li><a href="template-form/check-answers">Check your answers</a> with altered style and submit button</li>
+    <li><a href="template-form/template-question-page">Template question page</a></li>
+  </ul>
+  <h2 class="govuk-heading-m">Save the current folder (create new version)</h2>
+  <ol class="govuk-list govuk-list--number">
+    <li>Duplicate the current folder</li>
+    <li>Rename the current folder to the version number</li>
+    <li>Replace every reference to 'current' with the new version number</li>
+  </ol>
+  <h2 class="govuk-heading-m">Start a project</h2>
+  <ol class="govuk-list govuk-list--number">
+    <li>Copy the template-project folder and place in the 'views' folder.</li>
+    <li>Rename template-project to your project name. We'll use <code>project</code></li>
+    <li>Delete the folders '1' and '2'.</li>
+    <li>To <code>routes.js</code>, add <code>router.use('/project/', require('./views/project/_routes'))</code> above <code>module.exports</code>.</li>
+    <li>Rename <code>template-form</code> to your form name. We'll use <code>form</code>.
+    <li>Replace every place <code>template-form</code> with <code>form</code>.
+  </ol>
+{% endblock %}

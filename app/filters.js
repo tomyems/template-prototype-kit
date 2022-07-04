@@ -5,7 +5,14 @@ module.exports = function (env) {
    * gov.uk core filters by creating filter methods of the same name.
    * @type {Object}
    */
-  const filters = {}
+   const filters = {}
+
+   filters.toMonth = function(x){
+     months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+     if (x > 0){ return months[x - 1]; // returns date as per month
+     } else {
+       return x ;
+     }}
 
   /* ------------------------------------------------------------------
     add your methods to the filters obj below this comment block:

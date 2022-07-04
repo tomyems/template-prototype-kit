@@ -1,0 +1,20 @@
+{% extends "template-project/1/base.html" %}
+
+{% set pageTitle = "Page index for template form" %}
+
+{% block backLink %}
+  {{ govukBackLink({
+    text: "Back",
+    href: "../index"
+  }) }}
+{% endblock %}
+
+{% block content %}
+  <span class="govuk-caption-l">Sprint 1</span>
+  <h1 class="govuk-heading-l">Form pages</h1>
+  <ul class="govuk-list govuk-list--bullet">
+    <li><a href="template-form/radios">Radio question</a></li>
+    <li><a href="template-form/checkboxes">Checkboxes question</a></li>
+    <li><a href="template-form/multiple-questions">Multiple questions</a></li>
+  </ul>
+{% endblock %}

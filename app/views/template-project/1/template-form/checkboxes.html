@@ -1,0 +1,40 @@
+{% extends "template-project/1/base-form.html" %}
+
+{% set pageTitle = "How was this interception selected?" %}
+{% set nextPage = "multiple-questions" %}
+
+{% block pageContent %}
+<div class="govuk-form-group">
+  <fieldset class="govuk-fieldset" aria-describedby="waste-hint">
+    <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+      <h1 class="govuk-fieldset__heading">
+        Which types of waste do you transport?
+      </h1>
+    </legend>
+    <div id="waste-hint" class="govuk-hint">
+      Select all that apply.
+    </div>
+    <div class="govuk-checkboxes" data-module="govuk-checkboxes">
+      <div class="govuk-checkboxes__item">
+        <input class="govuk-checkboxes__input" id="waste" name="waste" type="checkbox" value="carcasses" {{ checked("waste", "carcasses") }}>
+        <label class="govuk-label govuk-checkboxes__label" for="waste">
+          Waste from animal carcasses
+        </label>
+      </div>
+      <div class="govuk-checkboxes__item">
+        <input class="govuk-checkboxes__input" id="waste-2" name="waste" type="checkbox" value="mines" {{ checked("waste", "mines") }}>
+        <label class="govuk-label govuk-checkboxes__label" for="waste-2">
+          Waste from mines or quarries
+        </label>
+      </div>
+      <div class="govuk-checkboxes__item">
+        <input class="govuk-checkboxes__input" id="waste-3" name="waste" type="checkbox" value="farm" {{ checked("waste", "farm") }}>
+        <label class="govuk-label govuk-checkboxes__label" for="waste-3">
+          Farm or agricultural waste
+        </label>
+      </div>
+    </div>
+
+  </fieldset>
+</div>
+{% endblock %}

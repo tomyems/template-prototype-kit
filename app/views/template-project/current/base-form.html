@@ -1,0 +1,60 @@
+{% extends "template-project/current/base.html" %}
+
+{% block pageTitle %}
+  {% set pageTitle = pageTitle or pageHeading %}
+  {% if errorList %}
+      {% set pageTitle = "Error: " + pageTitle %}
+  {% endif %}
+  {{ pageTitle }} - {{ formName }} - {{ platformName }}
+{% endblock %}
+
+{% block backLink %}
+  {{ govukBackLink({
+    text: "Back",
+    href: "javascript:window.history.back()"
+  }) }}
+{% endblock %}
+
+{% block content %}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-full">
+      <!-- If there's any errors found in the routes file, then show the
+      error summary box. These are added by the addError function.
+
+      For example:
+        pageErrors.addError(id of element, error message) -->
+      {% if errorList %}
+        {{ govukErrorSummary({
+          "titleText": "There is a problem",
+          "errorList": errorList
+        }) }}
+      {% endif %}
+
+      {% if pageHeading %}
+        <h1 class="govuk-heading-l">
+          {{ pageHeading }}
+        </h1>
+      {% endif %}
+
+      <form id="form-next" class="form" action="{{ nextPage or defaultPageRoute }}" method="post" novalidate>
+          {% block pageContent %}
+            <p>Override this content</p>
+          {% endblock %}
+
+          {% block buttons %}
+              <div class="govuk-button-group">
+                {% if useSubmitButton %}
+                  {% set primaryButtonText = "Submit" %}
+                {% endif %}
+                <button class="govuk-button" data-module="govuk-button">
+                  {{ primaryButtonText or "Save and continue" }}
+                </button>
+                <button class="govuk-button govuk-button--secondary" data-module="govuk-button" formaction="#">
+                  Save and return later
+                </button>
+            {% endblock %}
+        </div>
+      </form>
+    </div>
+  </div>
+{% endblock %}

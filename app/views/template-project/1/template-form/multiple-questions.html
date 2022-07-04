@@ -1,0 +1,50 @@
+{% extends "template-project/1/base-form.html" %}
+
+{% set pageHeading = "Event details" %}
+{% set nextPage = "index" %}
+
+{% block pageContent %}
+<div class="govuk-form-group">
+  <fieldset class="govuk-fieldset" role="group" aria-describedby="event-date-hint">
+    <legend class="govuk-fieldset__legend">
+      Event date
+    </legend>
+    <div id="event-date-hint" class="govuk-hint">
+      For example, 27 3 2022
+    </div>
+    <div class="govuk-date-input" id="event-date">
+      <div class="govuk-date-input__item">
+        <div class="govuk-form-group">
+          <label class="govuk-label govuk-date-input__label" for="event-date-day">
+            Day
+          </label>
+          <input class="govuk-input govuk-date-input__input govuk-input--width-2" id="event-date-day" name="event-date-day" type="text" inputmode="numeric" value="{{data['event-date-day'] or '5'}}">
+        </div>
+      </div>
+      <div class="govuk-date-input__item">
+        <div class="govuk-form-group">
+          <label class="govuk-label govuk-date-input__label" for="event-date-month">
+            Month
+          </label>
+          <input class="govuk-input govuk-date-input__input govuk-input--width-2" id="event-date-month" name="event-date-month" type="text" inputmode="numeric" value="{{data['event-date-month'] or '5' }}">
+        </div>
+      </div>
+      <div class="govuk-date-input__item">
+        <div class="govuk-form-group">
+          <label class="govuk-label govuk-date-input__label" for="event-date-year">
+            Year
+          </label>
+          <input class="govuk-input govuk-date-input__input govuk-input--width-4" id="event-date-year" name="event-date-year" type="text" inputmode="numeric" value="{{data['event-date-year'] or '2022' }}">
+        </div>
+      </div>
+    </div>
+  </fieldset>
+</div>
+
+<div class="govuk-form-group">
+  <label class="govuk-label" for="event-description">
+    What happened at the event?
+  </label>
+  <textarea class="govuk-textarea" id="event-description" name="event-description" rows="5"></textarea>
+</div>
+{% endblock %}

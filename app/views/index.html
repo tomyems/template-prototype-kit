@@ -1,59 +1,16 @@
 {% extends "layout.html" %}
 
 {% block pageTitle %}
-  Home – Home Office prototype kit
+  Index - Template project Home Office styled prototype kit
 {% endblock %}
 
 {% block content %}
-
-  <div class="govuk-grid-row">
-    <div class="govuk-grid-column-two-thirds">
-      <h1 class="govuk-heading-xl">
-        Prototype your service with the Home Office styled GOV.UK prototype kit
-        <span class="govuk-caption-l">Based on <a href="https://github.com/alphagov/govuk_prototype_kit">govuk_prototype_kit</a> {{releaseVersion}}</span>
-      </h1>{{releaseVersion | log }}
-
-      <p>
-        This kit lets you rapidly create HTML prototypes of internal Home Office services.
-      </p>
-
-      <p>
-        It contains all you need to prototype anything from simple static pages to complex, data-driven transactions.
-        It's based on the <a href="https://govuk-prototype-kit.herokuapp.com/docs">GOV.UK Prototype Kit</a>, which:
-        <ul class="govuk-list govuk-list--bullet">
-          <li>is styled for internal Home Office applications
-          <li>has additional Home Office components
-        </ul>
-      </p>
-
-      <h2 class="govuk-heading-m">About this page</h2>
-
-      <p>We recommend you add links to your prototype to this page, rather than delete it.
-        You'll find this page in the kit at '/app/views/index.html'.</p>
-
-      <p>You can change the service name by editing the file '/app/config.js'. This will appear in the header.</p>
-
-      <h2 class="govuk-heading-m">Use this prototyping kit</h2>
-
-      <p>We've extended the <a href="https://design-system.service.gov.uk/">GOV.UK design system</a> for additional use cases and users, including internal services.</p>
-
-      <p>They have been developed by the Home Office research and design teams to help develop and create consistent, usable services.</p>
-
-      <p>Learn more about the <a href="https://design.homeoffice.gov.uk/">Home Office design system</a> including example components and guidance on usage.</p>
-
-      <p>We recommend you don't change the Home Office styles, found in 'app/assets/sass/home-office'. If you find a problem or a user need to change a pattern, we encourage you to <a href="https://design.homeoffice.gov.uk/contribute">contribute to the design system</a> which will help us to improve it so that everyone can benefit.</p>
-
-      <h2 class="govuk-heading-m">Examples and documentation</h2>
-
-      <ul class="govuk-list govuk-list--bullet">
-        <li>
-          <a href="/docs/tutorials-and-examples">Tutorials and templates</a>
-        </li>
-        <li>
-          <a href="https://design-system.service.gov.uk">GOV.UK Design System</a>
-        </li>
-      </ul>
-    </div>
-  </div>
-
+  <h1 class="govuk-heading-l">Template project</h1>
+  <p class="govuk-body">This is an implementation of the <a href="https://github.com/UKHomeOffice/home_office_design_kit">Home Office-styled GOV.UK prototype kit</a>.</p>
+  <p class="govuk-body">This is an index of the template project, showing previous sprint histories:</p>
+  <ul class="govuk-list govuk-list--bullet">
+    <li><a href="template-project/current/index">template sprint (current)</a></li>
+    <li><a href="template-project/2/index">template sprint (version 2)</a></li>
+    <li><a href="template-project/1/index">template sprint (version 1)</a></li>
+  </ul>
 {% endblock %}

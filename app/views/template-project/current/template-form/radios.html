@@ -1,0 +1,50 @@
+{% extends "template-project/current/template-form/base-form.html" %}
+
+<!-- Just sets the page title, and not the heading 1, as the heading 1 is inside
+the radios fieldset. -->
+{% set pageTitle = "How was this interception selected?" %}
+
+<!-- nextPage sets where the save and continue button goes. By default the save
+and continue button just add '-route' to the end of the URL path. This can then
+be picked up in the _routes.js file.
+
+To override this just set the nextPage variable
+{# {% set nextPage = "index" %} #} -->
+
+<!-- The content between the header and the buttons -->
+{% block pageContent %}
+  {{ govukRadios({
+    idPrefix: "where-do-you-live",
+    name: "where-do-you-live",
+    fieldset: {
+      legend: {
+        text: "Where do you live?",
+        isPageHeading: true,
+        classes: "govuk-fieldset__legend--l"
+      }
+    },
+    items: [
+      {
+        value: "england",
+        text: "England",
+        checked: checked('where-do-you-live', 'england')
+      },
+      {
+        value: "scotland",
+        text: "Scotland",
+        checked: checked('where-do-you-live', 'scotland')
+      },
+      {
+        value: "wales",
+        text: "Wales",
+        checked: checked('where-do-you-live', 'wales')
+      },
+      {
+        value: "northern-ireland",
+        text: "Northern Ireland",
+        checked: checked('where-do-you-live', 'northern-ireland')
+      }
+    ],
+    errorMessage: errorWhereDoYouLive
+  }) }}
+{% endblock %}

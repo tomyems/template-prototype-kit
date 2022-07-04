@@ -1,0 +1,67 @@
+{% extends "template-project/current/template-form/base-form.html" %}
+
+<!-- This makes a H1 with the pageHeading text. It also sets the title of the
+page. -->
+{% set pageHeading = "Heading level 1 and page title" %}
+
+<!-- If you have a single question on the page, and the heading 1 is part of the
+component, then set pageTitle instead. -->
+{% set pageTitle = "Just the page title" %}
+
+<!-- nextPage sets where the save and continue button goes. By default the save
+and continue button just add '-route' to the end of the URL path. This can then
+be picked up in the _routes.js file.
+
+To override this just set the nextPage variable
+{# {% set nextPage = "check-answers" %} #} -->
+
+<!-- If true, has a submit button instead of save and continue -->
+{% set useSubmitButton = false %}
+
+<!-- To change the primary button text, set primaryButtonText. By default it
+shows "Save and continue" -->
+{% set primaryButtonText = "" %}
+
+<!-- {#
+  Override styles on this page and this page only, using the pageStyle block.
+  The contents of the block should be plain css, as the <style> tag is included in
+  the template.
+  {% block pageStyle %}
+  .record-item-input-box {
+    width: 40%;
+  }
+  .govuk-heading-m {
+    color: red;
+  }
+  {% endblock %}
+#} -->
+
+<!-- {#
+  The default back link has the text 'back' and is the same as selecting the
+  back button in the browser. You can override this by using this block.
+  {% block backLink %}
+    {{ govukBackLink({
+      text: "The text for the back link",
+      href: "The link to where the back link should go"
+    }) }}
+  {% endblock %}
+#} -->
+
+<!-- The content between the heading 1 and the buttons -->
+{% block pageContent %}
+  <p class="govuk-body">Replace this content.</p>
+{% endblock %}
+
+<!-- {#
+  If you want to remove the buttons completely, add a blank buttons block.
+  If you would like different buttons, add your buttons to this block.
+  {% block buttons %}
+
+  {% endblock %}
+#} -->
+
+{% block pageScripts %}
+<!-- Add any javascript files here. Include javascript files only on the pages
+that need them. Excessive javascript files loaded on other pages may slow down
+the response times of the prototype. -->
+{% endblock %}
