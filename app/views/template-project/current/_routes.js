@@ -52,7 +52,6 @@ router.post('/template-form/multiple-questions-route', function (req, res) {
   // Test to see if the page has any errors at all.
   if (pageErrors.hasErrors()) {
     // render the same page with errors
-    console.log(req.session.data)
     res.render('template-project/current/template-form/multiple-questions', pageErrors)
   } else {
     // given no erros continue with normal routing logic
